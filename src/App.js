@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import ImportProject from "./ImportProject/ImportProject";
+import { Box, TextField } from "@mui/material";
 
 function App() {
+  const [token, setToken] = useState("");
+  const [storageUrl, setStorageUrl] = useState("");
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ImportProject url={storageUrl} token={token} />
+      <Box
+        component="form"
+        sx={{
+          "& .MuiTextField-root": { m: 1, width: "25ch" },
+        }}
+        noValidate
+        autoComplete="off"
+      >
+        <TextField
+          multiline={true}
+          value={token}
+          onChange={(e) => setToken(e.target.value)}
+          label="Token"
+        />
+        <TextField
+          value={storageUrl}
+          onChange={(e) => setStorageUrl(e.target.value)}
+          label="Storage URL"
+        />
+      </Box>
     </div>
   );
 }
